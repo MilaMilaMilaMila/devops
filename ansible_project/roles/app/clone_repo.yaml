@@ -1,0 +1,19 @@
+---
+- name: Clone GitHub repository on Ubuntu
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Clone the GitHub repository
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "{{ clone_dir }}"
+        version: main
+
+    - name: Verify the repository has been cloned
+      command: ls "{{ clone_dir }}"
+      register: repo_contents
+
+    - name: Display the contents of the cloned repository
+      debug:
+        msg: "Repository contents: {{ repo_contents.stdout }}"

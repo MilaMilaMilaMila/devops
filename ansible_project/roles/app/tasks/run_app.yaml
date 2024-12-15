@@ -1,0 +1,38 @@
+---
+- name: "Run Django Local Library Application"
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Make manage.py executable
+      file:
+        path: "{{ clone_dir }}/manage.py"
+        mode: 0777
+
+    - name: Install specified python requirements
+      ansible.builtin.pip:
+        requirements: "{{ clone_dir }}/requirements.txt"
+
+    - name: Make django migrations
+      community.general.django_manage:
+        command: makemigrations
+        project_path: "{{ clone_dir }}"
+        pythonpath: "{{ py_path }}"
+
+    - name: Django migrate
+      community.general.django_manage:
+        command: migrate
+        project_path: "{{ clone_dir }}"
+        pythonpath: "{{ py_path }}"
+
+    - name: Django collectstatistics
+      community.general.django_manage:
+        command: collectstatic
+        project_path: "{{ clone_dir }}"
+        pythonpath: "{{ py_path }}"
+
+    - name: Django test
+      community.general.django_manage:
+        command: test
+        project_path: "{{ clone_dir }}"
+        pythonpath: "{{ py_path }}"

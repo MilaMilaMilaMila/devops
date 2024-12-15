@@ -1,0 +1,48 @@
+---
+- name: Install Python 3 on Ubuntu
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Python 3
+      apt:
+        name: python3
+        state: present
+
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install python3 venv
+      apt:
+        name: python3-venv
+        state: present
+
+    - name: Verify Python 3 installation
+      command: python3 --version
+      register: python3_version
+
+    - name: Display Python 3 version
+      debug:
+        msg: "Python 3 version: {{ python3_version.stdout }}"
+
+    - name: Verify pip3 installation
+      command: pip3 --version
+      register: pip3_version
+
+    - name: Display pip3 version
+      debug:
+        msg: "pip3 version: {{ pip3_version.stdout }}"
+
+    - name: Verify python3-venv installation
+      command: python3 -m venv --help
+      register: venv_help
+
+    - name: Display python3-venv help
+      debug:
+        msg: "python3-venv help: {{ venv_help.stdout }}"
