@@ -1,7 +1,8 @@
 # DOCKER PLAYBOOK
 ---
-- name: Setup Docker on Ubuntu Server 22.04
+- name: Setup docker and run app on Ubuntu Server 22.04
   hosts: app
   become: true
   roles:
+    - docker
     - app
