@@ -2,3 +2,7 @@ roles:
   - src: git+https://gitlab.com/milamilamilamila2/devops.git
     version: master
     name: docker
+
+  - src: git+https://gitlab.com/milamilamilamila2/nginx.git
+    version: master
+    name: nginx
