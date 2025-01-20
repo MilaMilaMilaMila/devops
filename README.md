@@ -29,3 +29,9 @@ ansible-playbook playbook.yaml
 
 ## C Nginx
 ![img_2.png](img_2.png)
+
+## Получили артефактный ovpn-файл для подключения
+![img_3.png](img_3.png)
+
+## Molecule тесты пройдены 
+![img_5.png](img_5.png)
